@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Concert+One&family=Gugi&family=Monda:wght@400..700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- Css -->
+    <link rel="stylesheet" href="/styles/normalize.css">
+    <link rel="stylesheet" href="/styles/common.css">
+    <link rel="stylesheet" href="/styles/login.css">
     <title>Login</title>
 </head>
+
 <body>
-    <h1>Login</h1>
-    <div>
-        <form method="POST">
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email">
+    <div class="login">
+        <div class="bg-login"></div>
+        <div class="overlay"></div>
+        <main class="container-login">        
+            <div class="cont-form-login">
+                <form method="POST">
+                    <div class="cont-icon">
+                        <iconify-icon icon="mynaui:user-square-solid"></iconify-icon>
+                    </div>
+                    <h1>Login</h1>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email"
+                        placeholder="example@mail.com">
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password"
+                        placeholder="write your password...">
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Login">
+                </form>
             </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password">
-            </div>
-            <input type="submit" value="Login">
-        </form>
+        </main>
     </div>
 </body>
+
 </html>

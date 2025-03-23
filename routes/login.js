@@ -19,7 +19,8 @@ router.post('/', async (req, res, next) => {
         }
         req.session.username = user.name
         req.session.userID = user._id
-        res.redirect('/profile')
+        const to = req.query.from ?? '/'
+        res.redirect(to)
     } catch (error) {
         next(error)
     }

@@ -2,13 +2,13 @@ export const logginPost = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email: email })
-        console.log(email,password);
-        
+
         if (!user || !(await user.comparePassword(password))) {
             res.locals.error = 'Invalid credentials'
             res.locals.email = email
             return res.render('login')            
         }
+
         req.session.username = user.name
         req.session.userID = user._id
         res.redirect('/profile')
@@ -17,7 +17,7 @@ export const logginPost = async (req, res, next) => {
     }
 }
 
-export const logginGet = (req, res, next) => {
+export const logginGet = (req, res, next) => {        
     res.render('login');
 }
 
@@ -26,8 +26,7 @@ export const logout = (req,res,next)=>{
         if(err){
             next(err)
             return
-        }       
+        }
+        res.redirect("/login");       
     })
-    res.redirect("/login");
-    
 }

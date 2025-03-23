@@ -8,11 +8,7 @@ export const index = (req, res, next) => {
 
 export const profile = async (req, res, next) => {
     try {
-        const user = req.session.userID;
-        if (!user) {
-            res.redirect("/login");
-            return
-        }
+        const user = req.session.userID;        
         res.locals.products = await Product.find({ owner: user }).populate('tags', 'name -_id');
         res.locals.tags = await Tag.find()
         res.render('profile');

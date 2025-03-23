@@ -1,0 +1,120 @@
+
+div.login{   
+    position: relative;
+    > div.bg-login{
+        position: absolute;
+        inset: 0;
+        /* background-color: yellowgreen; */
+        background-image: url('../imgs/bg-login.avif');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        z-index: -2;        
+    }
+    > div.overlay {
+        /* min-height: 100vh; */
+        position: absolute;
+        inset: 0;
+        background-image: url('../imgs/simple-pattern-overlay.png');
+        background-repeat: repeat;
+        background-position: left center;
+        background-color: rgba(0, 0, 0, .15);
+        z-index: -1;
+    } 
+    > main.container-login{        
+        min-height: 100vh;
+        max-width: 80vw;
+        margin: 0 auto;        
+        > div.cont-form-login{            
+            min-height: 100vh;             
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            > form{
+                flex-grow: 1;
+                padding: 4rem 1rem;
+                border-radius: .5rem;
+                border: 2px solid var(--color-text-primary);
+                backdrop-filter: blur(10px);
+                background: linear-gradient(#fff2, transparent);
+                display: flex;
+                flex-direction: column;
+                gap: .9rem;
+                font-family: 'Concert One',Arial, Helvetica, sans-serif;
+                font-size: .95rem;
+                font-weight: 100;
+                position: relative;
+                > h1{
+                    font-family: 'Gugi',Arial, Helvetica, sans-serif;
+                    text-shadow: -4px 1px var(--color-text-secondary);
+                    color: var(--color-success);
+                    text-align: center;
+                    padding-bottom: 1rem;
+                }
+                > div.cont-icon{
+                    position: absolute;
+                    left: 50%;
+                    top: -2.7rem;
+                    transform: translateX(-50%);
+                    width: fit-content;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 5em;
+                    color: var(--color-text-primary);                     
+                }
+                > div:not(.cont-icon){
+                    display: flex;
+                    flex-direction: column;
+                    > label{
+                        color: var(--color-success);
+                        font-size: 1.5em;
+                        text-shadow: 1px 1px var(--color-text-primary);
+                        /* letter-spacing: .09rem; */
+                    }
+                    > input[type="email"],input[type="password"]{
+                        outline: none;
+                        background-color: var(--color-primary);
+                        border: none;
+                        padding: .4rem .5rem;
+                        border-radius: .3rem;
+                        border: solid 1px var(--color-primary);
+                        transition: all .3s ease;
+                        color: var(--color-text-primary);
+                        font-weight: 300;
+                        letter-spacing: .09rem;
+                        font-size: 1.2em;
+                        &:focus{
+                            border-color: var(--color-text-primary);
+                            background-color: var(--color-secondary);
+                        }
+                    }
+                }
+                > input[type="submit"]{
+                    padding: .5rem 1.5rem;
+                    align-self: flex-start;
+                    transform: translateY(1rem);
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (width > 768px) {
+    div.login{
+        > main.container-login{
+            max-width: 400px;
+            div.cont-form-login{
+                > form {
+                    font-size: 1.2rem;
+                    /* background-color: aqua; */
+                    > div.cont-icon {
+                        top: -3.3rem;
+                    }
+                }
+            }
+        }
+    }
+    
+}
