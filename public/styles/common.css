@@ -1,0 +1,88 @@
+:root {
+    font-size: 16px;
+    --bg-page: #27374D;
+    /* --color-text:#fff;   */
+    --color-primary: #27391C;
+    --color-secondary: #3F4F44;
+    --color-warning: #A27B5C;
+    --color-danger: #8E1616;
+
+    --color-text-primary: #ECDFCC;
+    --color-text-secondary: #B9B4C7;
+    --color-text-warning: #F2613F;
+    --color-text-danger: #526D82;
+    --color-success:#1B4242;
+
+    box-sizing: border-box;
+
+    --arrow-bg: rgba(255, 255, 255, 0.3);
+    --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+    --option-bg: white;
+    --select-bg: rgba(255, 255, 255, 0.2);
+}
+
+body {
+    background-color: var(--bg-page);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+ol,
+figure {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.headding-5{
+    font-size: 1.2rem;
+    font-weight: 400;    
+}
+
+.btn {
+    /* background-color: var(--color-primary); */
+    color: var(--color-text-secondary);
+    border: none;
+    padding: .3rem 1rem;
+    border-radius: .3rem;
+    transition: all .3s ease;
+    cursor: pointer;
+    &:hover{
+        outline: none;
+    }
+}
+
+.btn-primary{
+    background-color: var(--color-primary);
+    &:hover{
+        background-color: var(--color-secondary);
+    }
+}
+
+.btn-secondary {
+    background-color: var(--color-text-danger);
+    &:hover{
+        background-color: var(--color-success);
+    }
+}
+
+.btn-danger{
+    background-color: var(--color-danger);
+    &:hover{
+        background-color: var(--color-warning);
+        color: var(--color-primary);
+    }
+}

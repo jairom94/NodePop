@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Gugi&family=Monda:wght@400..700&display=swap"
+        rel="stylesheet">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="/styles/normalize.css">
+    <link rel="stylesheet" href="/styles/common.css">
+    <link rel="stylesheet" href="/styles/profile.css">
+    <title>Profile</title>
+</head>
+
+<body>
+    <header>
+        <h2>
+            Bienvenido
+            <%= session.username %>
+        </h2>
+        <div>            
+            <a href="/logout">Cerrar Sesión</a>
+        </div>
+    </header>
+    <main class="profile">
+        <section class="add-product">
+            <div class="cont-form">
+                <%- include('partials/frmAddProduct.ejs') %>
+            </div>
+        </section>
+        <section class="products">
+            <h2>My products</h2>
+            <ul class="list-products">
+                <% products.forEach(product=> { %>
+                    <li>
+                        <figure>
+                            <div class="cont-img-product">
+                                <img class="img-p" src="<%= product.image %> " alt="<%= product.name %>">
+                                <div class="overlay">
+                                    <form action="/products/<%= product.id %>" method="delete">
+                                        <input type="submit" class="btn btn-secondary" value="Editar">
+                                        <input type="submit" class="btn btn-danger" value="Eliminar">
+                                    </form>
+                                </div>
+                            </div>
+                            <figcaption>
+                                <div class="name-product">
+                                    <%= product.name %>
+                                </div>
+                                <div class="detail">
+                                    <div class="price">
+                                        <span>
+                                            $ <%= product.price %>
+                                        </span>
+                                    </div>
+                                    <div class="tags">
+                                        <% product.tags.forEach(tag=> { %>
+                                            <span>
+                                                <%= tag.name %>
+                                            </span>
+                                            <% }); %>
+                                    </div>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <% }); %>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>Soy el footer</p>
+    </footer>
+    <script>        
+        const refreshImage = async (htmlImg) => {
+            try {
+                const respuesta = await fetch(htmlImg.src);
+                const blob = await respuesta.blob();
+                const urlImagen = URL.createObjectURL(blob);
+                htmlImg.src = urlImagen;
+
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const imgs = document.querySelectorAll('.img-p')
+            imgs.forEach((img, index) => {
+                refreshImage(img)
+                    .then(res=>res)
+            })
+        })
+    </script>
+</body>
+
+</html>

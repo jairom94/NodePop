@@ -1,0 +1,41 @@
+<form action="/products/add" method="post">
+    <div>
+        <h2>Add Product</h2>
+    </div>
+    <div>
+        <label for="name" class="headding-5">Nombre</label>
+        <input type="text" name="name" id="name" autocomplete="off"
+        placeholder="Nombre del producto..." required>        
+    </div>
+    <div>
+        <label for="price" class="headding-5">Precio</label>
+        <input type="text" name="price" id="price" autocomplete="off"
+        placeholder="0.00"
+        pattern="^\d+\.\d{2}$" 
+        required
+        >        
+    </div>
+    <div>
+        <label for="image" class="headding-5">Imagen</label>
+        <input type="text" name="image" id="image" 
+        autocomplete="off"   
+        placeholder="Url de la imagen"
+        value="https://imageplaceholder.net/600x400"     
+        >        
+    </div>
+    <div>        
+        <fieldset>
+            <legend class="headding-5">Tags</legend>
+            <% tags.forEach(tag => { %>
+                <label>
+                    <input type="checkbox" name="tags" value="<%= tag.name %>">
+                    <%= tag.name %>
+                </label>
+            <% }) %>       
+        </fieldset>
+    </div>
+    <div class="cont-btns">
+        <button class="btn btn-primary" type="submit">Guardar</button>
+        <button class="btn btn-danger" type="reset">Reset</button>
+    </div>
+</form>
