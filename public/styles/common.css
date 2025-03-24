@@ -13,6 +13,8 @@
     --color-text-danger: #526D82;
     --color-success:#1B4242;
 
+    --bg-header:#FFA725;
+
     box-sizing: border-box;
 
     --arrow-bg: rgba(255, 255, 255, 0.3);

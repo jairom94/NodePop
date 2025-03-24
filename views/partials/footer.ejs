@@ -1,0 +1,26 @@
+<footer>
+    <p>Soy el footer</p>
+</footer>
+<script>        
+    const refreshImage = async (htmlImg) => {
+        try {
+            const respuesta = await fetch(htmlImg.src);
+            const blob = await respuesta.blob();
+            const urlImagen = URL.createObjectURL(blob);
+            htmlImg.src = urlImagen;
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        const imgs = document.querySelectorAll('.img-p')
+        imgs.forEach((img, index) => {
+            refreshImage(img)
+                .then(res=>res)
+        })
+    })
+</script>
+</body>
+
+</html>

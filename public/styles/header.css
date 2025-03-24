@@ -1,0 +1,209 @@
+header.header-main {
+    /* position: fixed; */
+    /* left: 0;
+    top: 0; */
+    /* z-index: 50; */
+    > div.cont-burger {
+        height: 60px;
+        background-color: var(--bg-header);
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+    }
+    > input[type="checkbox"] {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 70;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        opacity: 0;
+        &:hover {            
+            + label {
+                color: var(--color-secondary);
+            }
+        }
+        &:checked {
+            + label {
+                > div.open {
+                    display: none;
+                    transform: scale(0);
+                }
+                > div.close {
+                    display: block;
+                    transform: scale(1);
+                }
+            }
+            ~ nav {
+                /* opacity: 1; */
+                /* display: block; */
+                /* inset: 0; */
+                transform: translateX(0);
+            }
+        }
+        + label {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: inline-block;
+            z-index: 60;            
+            color: var(--color-text-danger);
+            transition: all .3s ease;            
+            > div{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 40px;
+                transition: all .3s ease;
+                color: inherit;
+                filter: drop-shadow(-1px 1px 0 var(--color-text-primary));
+            }
+            > div.close {
+                display: none;
+                transform: scale(0);                
+            }
+        }
+    }
+    > nav {
+        background-color: var(--bg-header);
+        /* opacity: 0; */
+        /* position: absolute;
+        inset: 0; */
+        /* display: none; */
+        position: fixed;
+        z-index: 50;
+        inset: 0;        
+        transform: translateX(-100%);
+        transition: all .5s ease-in-out;
+        min-height: 100vh;
+        max-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-left: 1rem;
+        padding-top: 1rem;
+        padding-right: 1rem;
+        /* font-size: .7rem; */
+        > div.logo {
+            display: flex;
+            gap: 1rem;
+            font-family: 'Kanit';
+            font-size: 3rem;
+            > div:nth-child(1){                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: var(--color-secondary);
+                filter: drop-shadow(-5px -2px 4px var(--color-warning));
+            }
+            > div.name{
+                color: var(--color-secondary);
+                > span {
+                    font-weight: 900;                                        
+                    letter-spacing: -.9rem;
+                    text-shadow: -4px 0 0 var(--color-text-primary);
+                }
+            }
+        }
+        > ul.menu {
+            padding-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            /* gap: .5rem;             */
+            > li {                  
+                /* background-color: brown; */
+                color: var(--color-primary);
+                display: flex;
+                gap: .5rem;
+                font-size: 1.2rem;
+                border-bottom: .5px solid var(--color-text-danger);
+                > div:nth-child(1) {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.5rem;
+                }
+                > a{
+                    padding: .8rem .5rem;
+                    display: inline-block;                    
+                    letter-spacing: .1rem;
+                    font-family: 'Cairo';
+                    color: inherit;
+                    /* background-color: yellowgreen; */
+                    flex-grow: 1;
+                    transition: all .5s ease;
+                    display: flex;
+                    gap: .5rem;                    
+                    > div:nth-child(1) {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 1.5rem;
+                    }
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }              
+            }
+        }
+        > div.user-detail {
+            /* background-color: yellowgreen; */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding-bottom: 1rem;
+            > div {
+                display: flex;
+                > div:nth-child(1){                                    
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    /* background-color: blue; */
+                    > p {
+                        font-size: 1.3rem;
+                        font-family: 'Cairo',Arial, Helvetica, sans-serif;
+                        color: var(--color-primary);
+                        text-shadow: -1px 1px gray;
+                    }
+                    > a {
+                        display: flex;
+                        /* background-color: yellowgreen;                     */
+                        justify-content: center;
+                        align-items: center;
+                        gap: .3rem;
+                        color: var(--color-secondary);
+                        transition: all .3s ease;
+                        > div:nth-child(1) {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                > div:nth-child(2){
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 5rem;
+                    color: var(--color-primary);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (width > 480px) {
+    header.header-main{
+        > nav{
+            > div.logo {
+                font-size: 4rem;
+            }
+        }
+    }
+}

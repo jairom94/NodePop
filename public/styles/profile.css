@@ -1,6 +1,6 @@
 main.profile {
     font-family: 'Cairo', Arial, Helvetica, sans-serif;
-
+    padding-top: 100px;
     >section.add-product {
         >div.cont-form {
             max-width: 700px;
@@ -79,11 +79,35 @@ main.profile {
             }
         }
     }
+    >section.modal-add-product{
+        > button {            
+            transition: transform 0.2s;
+        }
+        > dialog {
+            padding: 0;
+            border: 1px solid var(--color-text-primary);
+            border-radius: .3rem;
+            /* overflow: hidden; */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-out;
+            width: 80vw;
+            &::backdrop{
+                background-color: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(5px);
+            }
+        }
+    }
 
     >section.products {
         /* background-color: blueviolet; */
-        padding: 0 .25rem;
-
+        padding: 0 .3rem;
+        > h2 {
+            font-family: 'Concert One',Arial, Helvetica, sans-serif;
+            color: var(--bg-header);
+            padding: 1rem 0;
+            text-transform: uppercase;
+            text-shadow: -2px -2px 0 var(--color-warning);
+        }
         >ul.list-products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -177,6 +201,121 @@ main.profile {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+#btn-open-modal{
+    display: inline-block;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: var(--bg-header);
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: .5rem 0;
+    transition: all .3s ease;
+    font-weight: 600;
+    &:hover {
+        background-color: var(--color-text-warning);
+    }
+}
+
+div.cont-form {
+    border-radius: inherit;
+    /* max-width: 700px;
+    margin: 0 auto; */
+    padding: 0 2rem;
+    background-color: var(--color-success);
+    >form {
+        /* background-color: yellowgreen; */
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        flex-direction: column;
+        gap: .5rem;
+        padding: .7rem 0;
+
+        >div.cont-btns {
+            display: flex;
+            flex-direction: row;
+        }
+
+        >div {
+            display: flex;
+            flex-direction: column;
+            gap: .3rem;
+            color: var(--color-text-primary);
+
+            >input[type="text"] {
+                border-radius: .3rem;
+                background-color: var(--color-secondary);
+                border: none;
+                padding: .5rem .6rem;
+                transition: all .3s ease;
+                color: var(--color-text-secondary);
+
+                &:focus {
+                    outline: none;
+                    border-bottom: 2px solid var(--color-text-secondary);
+                    border-radius: .3rem .3rem 0 0;
+                }
+            }
+
+            >select {
+                border-radius: .3rem;
+                background-color: var(--color-secondary);
+                appearance: none;
+                border: 0;
+                outline: 0;
+                font: inherit;
+                width: 100%;
+                padding: .5rem 4rem .5rem 1rem;
+                background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+                    linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+                border-radius: 0.3rem;
+                box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                /* padding: .5rem .6rem; */
+                color: var(--color-text-primary);
+
+                &:focus {
+                    outline: none;
+                }
+
+                option {
+                    color: inherit;
+                    background-color: var(--color-warning);
+                }
+            }
+
+            >fieldset {
+                display: flex;
+                flex-direction: column;
+                gap: .25rem;
+                border-radius: .3rem;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+@media screen and (width > 768px){
+    main.profile{
+        > section.modal-add-product{
+            > dialog {
+                max-width: 40vw;
             }
         }
     }

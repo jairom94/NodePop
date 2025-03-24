@@ -101,6 +101,24 @@ div.login{
     }
 }
 
+@media screen and (width > 480px) {
+    div.login{
+        > main.container-login{
+            max-width: 60vw;
+            div.cont-form-login{
+                > form {
+                    /* font-size: 1.2rem; */
+                    /* background-color: aqua; */
+                    > div.cont-icon {
+                        /* top: -3.3rem; */
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
 @media screen and (width > 768px) {
     div.login{
         > main.container-login{
