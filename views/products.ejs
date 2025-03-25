@@ -1,0 +1,91 @@
+<%- include('partials/header.ejs') %>
+    <main class="cont-products">        
+        <section class="modal-add-product">
+            <button popovertarget="modal-add-product" id="btn-open-modal">Add Product</button>
+            <dialog id="modal-add-product" popover>
+                <div class="cont-form">
+                    <%- include('partials/frmAddProduct.ejs') %>
+                </div>
+            </dialog>
+        </section>
+        <section class="filter-prducts">
+            <form action="/products/user/<%= session.userID %>/filter" method="get">
+                <fieldset>
+                    <legend>Filter By</legend>
+                    <div>
+                        <label for="f-name-product">Name</label>
+                        <input type="text" name="name" id="f-name-product">
+                    </div>
+                    <div>
+                        <fieldset>
+                            <legend>Range Price</legend>
+                            <div>
+                                <label for="f-min">Min</label>
+                            <input type="text" name="min" id="f-min">
+                            </div>
+                            <div>
+                                <label for="f-max">Max</label>
+                            <input type="text" name="max" id="f-max">
+                            </div>
+                        </fieldset>
+                        
+                    </div>
+                    <div>
+                        <fieldset>
+                            <legend class="headding-5">Tags</legend>
+                            <% tags.forEach(tag => { %>
+                                <label>
+                                    <input type="checkbox" name="tags" value="<%= tag.name %>">
+                                    <%= tag.name %>
+                                </label>
+                            <% }) %>       
+                        </fieldset>
+                    </div>
+                    <input type="submit" value="Filtrar">
+                </fieldset>
+            </form>
+        </section>
+        <section class="products">
+            <h2>My products</h2>
+            <ul class="list-products">
+                <% products.forEach(product=> { %>
+                    <li>
+                        <figure>
+                            <div class="cont-img-product">
+                                <img class="img-p" src="<%= product.image %> " alt="<%= product.name %>">
+                                <div class="overlay">
+                                    <div class="actions">
+                                        <!-- action="/products/product.id" method="delete" -->
+                                        <a class="btn btn-secondary" href="/products/delete/<%= product.id %>">Delete</a>
+                                        <a class="btn btn-danger">Edit</a>
+                                        <!-- <input type="submit" class="btn btn-secondary" value="Editar"> -->
+                                        <!-- <input type="submit" class="btn btn-danger" value="Eliminar"> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption>
+                                <div class="name-product">
+                                    <%= product.name %>
+                                </div>
+                                <div class="detail">
+                                    <div class="price">
+                                        <span>
+                                            $ <%= product.price %>
+                                        </span>
+                                    </div>
+                                    <div class="tags">
+                                        <% product.tags.forEach(tag=> { %>
+                                            <span>
+                                                <%= tag.name %>
+                                            </span>
+                                            <% }); %>
+                                    </div>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <% }); %>
+            </ul>
+        </section>
+    </main>
+    <%- include('partials/footer.ejs') %>

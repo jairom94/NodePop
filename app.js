@@ -9,7 +9,7 @@ import indexRouter from './routes/index.js';
 import loginRouter from './routes/login.js';
 import profileRouter from './routes/profile.js';
 import logoutRouter from './routes/logout.js';
-import addProductRouter from './routes/addProduct.js';
+import productRouter from './routes/products.js';
 
 await connectMongoose();
 console.log('Success connect to MongoDB');
@@ -33,15 +33,11 @@ app.use(sessionManager.useSessionInViews);
 
 app.use('/',indexRouter);
 app.use('/login',loginRouter);
-app.use((req,res,next)=>{
-    if(!req.session.userID){
-        res.redirect(`/login?from=${req.url}`)
-        return
-    }
-    next()
-})
+
+app.use(sessionManager.guard); //login required
 app.use('/profile',profileRouter);
 app.use('/logout',logoutRouter);
-app.use('/products',addProductRouter);
+app.use('/products',productRouter);
+
 
 export default app;

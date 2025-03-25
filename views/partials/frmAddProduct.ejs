@@ -5,14 +5,13 @@
     <div>
         <label for="name" class="headding-5">Nombre</label>
         <input type="text" name="name" id="name" autocomplete="off"
-        placeholder="Nombre del producto..." required>        
+        placeholder="Nombre del producto...">        
     </div>
     <div>
         <label for="price" class="headding-5">Precio</label>
-        <input type="text" name="price" id="price" autocomplete="off"
+        <input type="number" name="price" id="price" autocomplete="off"
         placeholder="0.00"
         pattern="^\d+\.\d{2}$" 
-        required
         >        
     </div>
     <div>
@@ -20,8 +19,16 @@
         <input type="text" name="image" id="image" 
         autocomplete="off"   
         placeholder="Url de la imagen"
-        value="https://imageplaceholder.net/600x400"     
+        value=""     
         >        
+    </div>
+    <div>
+        <figure class="cont-image">
+            <div>
+                <img id="image-generated" alt="Imagen Generada">
+            </div>
+        </figure>
+        <button id="show-image">Generar Imagen</button>
     </div>
     <div>        
         <fieldset>

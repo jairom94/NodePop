@@ -14,10 +14,23 @@
         }
     }
     document.addEventListener('DOMContentLoaded', () => {
-        const imgs = document.querySelectorAll('.img-p')
+        const imgs = document.querySelectorAll('.img-p-off')
         imgs.forEach((img, index) => {
             refreshImage(img)
                 .then(res=>res)
+        });
+        
+        const $btnGen = document.querySelector('#show-image');
+        $btnGen.addEventListener('click',()=>{
+            const $imgToGen = document.querySelector('#image-generated');
+            const ID_TO_GEN_IMAGE = Math.floor(Math.random()*100) + 100;
+            const URL_IMAGE = `https://picsum.photos/id/${ID_TO_GEN_IMAGE}/600/400`;
+            const $inputImage = document.querySelector('#image');
+            $imgToGen.src = URL_IMAGE;
+            $imgToGen.style.display = 'block';
+            $inputImage.value = URL_IMAGE;
+            $inputImage.setAttribute('disabled',true)
+
         })
     })
 </script>
