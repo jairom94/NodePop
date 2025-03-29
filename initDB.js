@@ -62,7 +62,7 @@ const initProducts = async () => {
             name: "Laptop Pro",
             price: 1500,
             owner: user1._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('work'),
                 getTagID('mobile')
@@ -72,7 +72,7 @@ const initProducts = async () => {
             name: "Smartphone X",
             price: 800,
             owner: user1._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('mobile'),
                 getTagID('lifestyle')
@@ -82,7 +82,7 @@ const initProducts = async () => {
             name: "Tablet S",
             price: 600,
             owner: user1._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('mobile'),
                 getTagID('work')
@@ -92,7 +92,7 @@ const initProducts = async () => {
             name: "Monitor HD",
             price: 350,
             owner: user1._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('work'),
                 getTagID('lifestyle')
@@ -102,7 +102,7 @@ const initProducts = async () => {
             name: "Smartwatch Z",
             price: 250,
             owner: user1._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('mobile'),
                 getTagID('lifestyle')
@@ -112,7 +112,7 @@ const initProducts = async () => {
             name: "Auriculares Pro",
             price: 150,
             owner: user2._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('lifestyle'),
                 getTagID('mobile')
@@ -122,7 +122,7 @@ const initProducts = async () => {
             name: "Teclado Mecánico",
             price: 120,
             owner: user2._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('work')
             ]
@@ -131,7 +131,7 @@ const initProducts = async () => {
             name: "Cámara Digital",
             price: 900,
             owner: user2._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('lifestyle'),
                 getTagID('mobile')
@@ -141,7 +141,7 @@ const initProducts = async () => {
             name: "Drone Explorer",
             price: 1100,
             owner: user2._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('motor'),
                 getTagID('lifestyle')
@@ -151,7 +151,7 @@ const initProducts = async () => {
             name: "Bicicleta Eléctrica",
             price: 1800,
             owner: user2._id,
-            image: `https://picsum.photos/id/${Math.floor(Math.random()*99)+1}/600/400`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 99) + 1}/600/400`,
             tags: [
                 getTagID('motor'),
                 getTagID('lifestyle')

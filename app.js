@@ -7,6 +7,7 @@ import * as sessionManager from './lib/sessionManager.js';
 
 import indexRouter from './routes/index.js';
 import loginRouter from './routes/login.js';
+import registerRouter from './routes/register.js';
 import profileRouter from './routes/profile.js';
 import logoutRouter from './routes/logout.js';
 import productRouter from './routes/products.js';
@@ -33,10 +34,10 @@ app.use(sessionManager.useSessionInViews);
 
 app.use('/',indexRouter);
 app.use('/login',loginRouter);
-
+app.use('/logout',logoutRouter);
+app.use('/register',registerRouter);
 app.use(sessionManager.guard); //login required
 app.use('/profile',profileRouter);
-app.use('/logout',logoutRouter);
 app.use('/products',productRouter);
 
 

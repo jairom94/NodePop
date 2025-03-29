@@ -17,6 +17,8 @@ router.post('/', async (req, res, next) => {
             res.locals.email = email
             return res.render('login')            
         }
+        console.log(`${user.name} ${user.lastname_1}`);
+        
         req.session.fullname = `${user.name} ${user.lastname_1}`
         req.session.userID = user._id
         const to = req.query.from ?? '/'

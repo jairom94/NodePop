@@ -1,91 +1,141 @@
 <%- include('partials/header.ejs') %>
-    <main class="cont-products">        
+    <main class="cont-products-n">
         <section class="modal-add-product">
-            <button popovertarget="modal-add-product" id="btn-open-modal">Add Product</button>
+            <button popovertarget="modal-add-product" id="btn-open-modal">ADD PRODUCT</button>
             <dialog id="modal-add-product" popover>
                 <div class="cont-form">
                     <%- include('partials/frmAddProduct.ejs') %>
                 </div>
             </dialog>
         </section>
-        <section class="filter-prducts">
-            <form action="/products/user/<%= session.userID %>/filter" method="get">
-                <fieldset>
-                    <legend>Filter By</legend>
-                    <div>
-                        <label for="f-name-product">Name</label>
-                        <input type="text" name="name" id="f-name-product">
-                    </div>
-                    <div>
-                        <fieldset>
+        <section class="filter-products">
+            <input type="checkbox" name="filter-check" id="filter-check">
+            <label for="filter-check">
+                <span>FILTER BY</span>
+            </label>
+            <div class="cont-frm-filter">
+                <form class="frm-filter" action="/products/user/<%= session.userID %>/filter" method="get">
+                    <fieldset>
+                        <legend>Options</legend>
+                        <div>
+                            <label for="f-name-product">Search Product</label>
+                            <input type="text" name="name" id="f-name-product"
+                            placeholder="write name product">
+                        </div>
+                        <div>
                             <legend>Range Price</legend>
-                            <div>
-                                <label for="f-min">Min</label>
-                            <input type="text" name="min" id="f-min">
-                            </div>
-                            <div>
-                                <label for="f-max">Max</label>
-                            <input type="text" name="max" id="f-max">
-                            </div>
-                        </fieldset>
-                        
-                    </div>
-                    <div>
-                        <fieldset>
-                            <legend class="headding-5">Tags</legend>
-                            <% tags.forEach(tag => { %>
-                                <label>
-                                    <input type="checkbox" name="tags" value="<%= tag.name %>">
-                                    <%= tag.name %>
-                                </label>
-                            <% }) %>       
-                        </fieldset>
-                    </div>
-                    <input type="submit" value="Filtrar">
-                </fieldset>
-            </form>
+                            <fieldset class="range">
+                                <div id="steps-slider"></div>
+                                <input  type="hidden" id="price-min" value="<%= rangePrice.min %>">
+                                <input  type="hidden" id="price-max" value="<%= rangePrice.max %>">
+                            </fieldset>
+    
+                        </div>
+                        <div>
+                            <legend>Tags</legend>
+                            <fieldset class="f-tags">
+                                <% tags.forEach(tag=> { %>
+                                    <label>
+                                        <input type="checkbox" name="tags" value="<%= tag.name %>">
+                                        <%= tag.name %>
+                                    </label>
+                                    <% }) %>
+                            </fieldset>
+                        </div>
+                        <input type="submit" value="Filtrar">
+                    </fieldset>
+                </form>
+            </div>
         </section>
         <section class="products">
-            <h2>My products</h2>
-            <ul class="list-products">
-                <% products.forEach(product=> { %>
-                    <li>
-                        <figure>
-                            <div class="cont-img-product">
-                                <img class="img-p" src="<%= product.image %> " alt="<%= product.name %>">
-                                <div class="overlay">
-                                    <div class="actions">
-                                        <!-- action="/products/product.id" method="delete" -->
-                                        <a class="btn btn-secondary" href="/products/delete/<%= product.id %>">Delete</a>
-                                        <a class="btn btn-danger">Edit</a>
-                                        <!-- <input type="submit" class="btn btn-secondary" value="Editar"> -->
-                                        <!-- <input type="submit" class="btn btn-danger" value="Eliminar"> -->
+            <h2>List products</h2>
+            <% if (pagination.products.length > 0) { %>        
+                <ul class="list-products">
+                    <% pagination.products.forEach(product=> { %>
+                        <li>
+                            <figure>
+                                <div class="cont-img-product">
+                                    <img class="img-p" src="<%= product.image %> " alt="<%= product.name %>">
+                                    <div class="overlay">
+                                        <div class="actions">
+                                            <!-- action="/products/product.id" method="delete" -->
+                                            <button class="btn btn-secondary"
+                                                onclick="document.querySelector('#modal-delete-<%= product._id %>').showModal()">
+                                                Delete
+                                            </button>
+                                            <button class="btn btn-danger">Edit</button>
+                                            <!-- <input type="submit" class="btn btn-secondary" value="Editar"> -->
+                                            <!-- <input type="submit" class="btn btn-danger" value="Eliminar"> -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <figcaption>
-                                <div class="name-product">
-                                    <%= product.name %>
-                                </div>
-                                <div class="detail">
-                                    <div class="price">
-                                        <span>
-                                            $ <%= product.price %>
-                                        </span>
+                                <figcaption>
+                                    <div class="name-product">
+                                        <%= product.name %>
                                     </div>
-                                    <div class="tags">
-                                        <% product.tags.forEach(tag=> { %>
+                                    <div class="detail">
+                                        <div class="price">
                                             <span>
-                                                <%= tag.name %>
+                                                $ <%= product.price %>
                                             </span>
-                                            <% }); %>
+                                        </div>
+                                        <div class="tags">
+                                            <% product.tags.forEach(tag=> { %>
+                                                <span>
+                                                    <%= tag.name %>
+                                                </span>
+                                                <% }); %>
+                                        </div>
                                     </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </li>
-                    <% }); %>
-            </ul>
-        </section>
+                                </figcaption>
+                            </figure>
+                            <dialog class="modal-delete" id="modal-delete-<%= product._id %>">
+                                <h2>
+                                    <div>
+                                        <iconify-icon icon="ic:baseline-railway-alert"></iconify-icon>
+                                    </div>
+                                    <span>Alert</span>
+                                </h2>
+                                <form action="/products/delete/<%= product.id %>" method="get">
+                                    <p>
+                                        Esta seguro de borrar el producto:<br>
+                                        <%= product.name %>
+                                    </p>
+                                    <input type="hidden" name="allow" value="true">
+                                    <div>
+                                        <button type="submit" id="allow-delete">Aceptar</button>
+                                        <button type="button" class="close-modal"
+                                            onclick="this.closest('dialog').close()">Cancelar</button>
+                                        <!-- <form method="dialog">
+                                            <button class="close-modal">Cancelar</button>
+                                        </form>                                     -->
+                                    </div>
+    
+                                </form>
+                            </dialog>
+                        </li>
+                        <% }); %>
+                </ul>
+            <% }else{ %>
+                <p>
+                    No se han encontrado productos.
+                </p>
+            <% } %>
+            <div class="pagination">
+                <% if (pagination.page> 1) { %>
+                    <a href="/products?page=<%= pagination.page-1 %>">Prev</a>
+                    <% } %>
+                        <% for( let i=1; i <=pagination.totalPages; i++ ) { %>
+                            <a href="/products?page=<%= i %>"
+                                class="page-item <%= pagination.page === i ? 'current-page' : '' %>">
+                                <%= i %>
+                            </a>
+                            <% } %>
+                                <% if (pagination.page < pagination.totalPages) { %>
+                                    <a href="/products?page=<%= pagination.page+1 %>">Next</a>
+                                    <% } %>
+            </div>
+        </section>        
     </main>
     <%- include('partials/footer.ejs') %>
+    <%- include('scripts/script_products.ejs') %>

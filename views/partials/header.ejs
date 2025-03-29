@@ -14,8 +14,16 @@
     <!-- Css -->
     <link rel="stylesheet" href="/styles/normalize.css">
     <link rel="stylesheet" href="/styles/common.css">
+    <link rel="stylesheet" href="/styles/login.css">
+    <link rel="stylesheet" href="/styles/register.css">
+    <link rel="stylesheet" href="/styles/home.css">
     <link rel="stylesheet" href="/styles/header.css">
     <link rel="stylesheet" href="/styles/products.css">
+    <link rel="stylesheet" href="/styles/profile.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+
+    <!-- CSS de noUiSlider -->
+    <link rel="stylesheet" href="/styles/nouislider.css">
 
     <!-- Icons -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
@@ -23,8 +31,10 @@
 </head>
 
 <body>
-    <header class="header-main">
-        <div class="cont-burger"></div>
+    <div class="container-page">
+        <header class="header-main">
+        <div class="menu-xs">
+            <div class="cont-burger"></div>
         <input type="checkbox" name="menu-checkbox" id="menu-checkbox">
         <label for="menu-checkbox" class="menu-btn">
             <div class="open">
@@ -123,4 +133,75 @@
                 </div>
             </div>
         </nav>
-    </header>
+        </div>
+        <div class="menu-lg">
+            <div class="cont-nav">
+                <nav>
+                    <a href="/">
+                        <div class="logo">
+                            <div>
+                                <iconify-icon icon="mdi:airballoon"></iconify-icon>
+                            </div>
+                            <div class="name">
+                                <span>N</span>
+                                <span>o</span>
+                                <span>d</span>
+                                <span>e</span>
+                                <span>P</span>
+                                <span>o</span>
+                                <span>p</span>
+                            </div>
+                        </div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="/">
+                                <div>
+                                    <iconify-icon icon="mdi:home"></iconify-icon>
+                                </div>
+                                <span>
+                                    Home
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/products">
+                                <div>
+                                    <iconify-icon icon="akar-icons:shopping-bag"></iconify-icon>
+                                </div>
+                                <span>
+                                    Product
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/profile">
+                                <div>
+                                    <iconify-icon icon="akar-icons:person"></iconify-icon>
+                                </div>
+                                <span>
+                                    Profile
+                                </span>
+                            </a>
+                        </li>
+                        <li class="login">
+                            <% if (session.userID) { %>
+                                <a href="/logout">                                
+                                    <span>
+                                        Logout
+                                    </span>
+                                </a>
+                            <% }else { %>
+                            <a href="/login">                                
+                                <span>
+                                    Registrate o inicia sessión
+                                </span>
+                            </a>
+                            <% } %>
+                        </li>
+                    </ul>                    
+                </nav>
+            </div>
+        </div>
+        
+        </header>

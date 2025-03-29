@@ -1,6 +1,6 @@
 :root {
     font-size: 16px;
-    --bg-page: #27374D;
+    --bg-page: #e8e8e8;
     /* --color-text:#fff;   */
     --color-primary: #27391C;
     --color-secondary: #3F4F44;
@@ -13,7 +13,19 @@
     --color-text-danger: #526D82;
     --color-success:#1B4242;
 
+
+
     --bg-header:#FFA725;
+    --bg-red-vintage:#E50046;
+    --bg-white-bone:#FAF6E3;
+    --bg-blue: #295F98;
+    --bg-blue-light: #536493;
+    --bg-green:#399918;
+    --bg-green-light:#597445;
+    --bg-black:#000;
+    --bg-red-dark:#8E1616;
+    --bg-black-primary:#2d2d2d;
+    --bg-black-light:#393E46;
 
     box-sizing: border-box;
 
@@ -25,7 +37,18 @@
 
 body {
     background-color: var(--bg-page);
+    /* display: flex;
+    flex-direction: column; */
+    /* min-height: 100vh;     */
+    > div.container-page{
+        /* background-color: indianred; */
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
 }
+
 
 p,
 h1,

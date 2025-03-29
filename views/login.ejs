@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Concert+One&family=Gugi&family=Monda:wght@400..700&display=swap"
-        rel="stylesheet">
-
-    <!-- Icons -->
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    
-    <!-- Css -->
-    <link rel="stylesheet" href="/styles/normalize.css">
-    <link rel="stylesheet" href="/styles/common.css">
-    <link rel="stylesheet" href="/styles/login.css">
-    <title>Login</title>
-</head>
-
-<body>
+    <%- include('partials/header.ejs') %>
     <div class="login">
         <div class="bg-login"></div>
         <div class="overlay"></div>
         <main class="container-login">        
             <div class="cont-form-login">
-                <form method="POST">
+                <form method="post">
                     <div class="cont-icon">
                         <iconify-icon icon="mynaui:user-square-solid"></iconify-icon>
                     </div>
@@ -43,11 +20,15 @@
                         <input type="password" name="password" id="password"
                         placeholder="write your password...">
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Login">
+                    <input class="btn btn-primary" type="submit" value="Enter">
+                    <div class="to-register">
+                        <p>
+                            ¿No tienes cuenta? <a href="/register">Crear cuenta</a> 
+                        </p>
+                    </div>
                 </form>
             </div>
         </main>
     </div>
-</body>
-
-</html>
+    <%- include('partials/footer.ejs') %>
+    <%- include('scripts/script_home.ejs') %>

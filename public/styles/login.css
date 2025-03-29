@@ -1,6 +1,9 @@
 
 div.login{   
+    flex-grow: 1;    
     position: relative;
+    display: flex;
+    flex-direction: column;
     > div.bg-login{
         position: absolute;
         inset: 0;
@@ -22,14 +25,15 @@ div.login{
         z-index: -1;
     } 
     > main.container-login{        
-        min-height: 100vh;
-        max-width: 80vw;
-        margin: 0 auto;        
+        flex-grow: 1;
+        align-self: stretch;
+        max-width: 80vw;        
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;       
         > div.cont-form-login{            
-            min-height: 100vh;             
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding-bottom: 1.5rem;
             > form{
                 flex-grow: 1;
                 padding: 4rem 1rem;
@@ -40,7 +44,7 @@ div.login{
                 display: flex;
                 flex-direction: column;
                 gap: .9rem;
-                font-family: 'Concert One',Arial, Helvetica, sans-serif;
+                font-family: 'Monda',Arial, Helvetica, sans-serif;
                 font-size: .95rem;
                 font-weight: 100;
                 position: relative;
@@ -49,7 +53,7 @@ div.login{
                     text-shadow: -4px 1px var(--color-text-secondary);
                     color: var(--color-success);
                     text-align: center;
-                    padding-bottom: 1rem;
+                    padding-bottom: .5rem;
                 }
                 > div.cont-icon{
                     position: absolute;
@@ -68,7 +72,8 @@ div.login{
                     flex-direction: column;
                     > label{
                         color: var(--color-success);
-                        font-size: 1.5em;
+                        font-size: 1.1em;
+                        font-weight: 800;
                         text-shadow: 1px 1px var(--color-text-primary);
                         /* letter-spacing: .09rem; */
                     }
@@ -82,8 +87,8 @@ div.login{
                         transition: all .3s ease;
                         color: var(--color-text-primary);
                         font-weight: 300;
-                        letter-spacing: .09rem;
-                        font-size: 1.2em;
+                        letter-spacing: .10rem;
+                        font-size: 1em;
                         &:focus{
                             border-color: var(--color-text-primary);
                             background-color: var(--color-secondary);
@@ -92,9 +97,27 @@ div.login{
                 }
                 > input[type="submit"]{
                     padding: .5rem 1.5rem;
-                    align-self: flex-start;
+                    
                     transform: translateY(1rem);
                     font-size: 1em;
+                    border: 1px solid var(--color-text-primary);
+                }
+                > div.to-register {
+                    padding-top: .8rem;
+                    > p {
+                        font-family: 'Monda',Arial, Helvetica, sans-serif;
+                        > a{
+                            color: var(--color-primary);
+                            font-weight: 600;
+                            text-shadow: .5px .5px 3px var(--option-bg);
+                            display: inline-block;
+                            transition: all .3s ease;
+                            &:hover{
+                                transform: scale(1.05);
+                                text-decoration: underline;
+                            }
+                        }
+                    }
                 }
             }
         }

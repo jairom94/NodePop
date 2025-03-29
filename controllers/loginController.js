@@ -17,7 +17,11 @@ export const logginPost = async (req, res, next) => {
     }
 }
 
-export const logginGet = (req, res, next) => {        
+export const logginGet = (req, res, next) => {       
+    if(req.session.userID){
+        res.redirect('/profile');
+        return
+    }
     res.render('login');
 }
 

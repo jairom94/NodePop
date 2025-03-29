@@ -1,39 +1,30 @@
-<footer>
-    <p>Soy el footer</p>
-</footer>
-<script>        
-    const refreshImage = async (htmlImg) => {
-        try {
-            const respuesta = await fetch(htmlImg.src);
-            const blob = await respuesta.blob();
-            const urlImagen = URL.createObjectURL(blob);
-            htmlImg.src = urlImagen;
-
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        const imgs = document.querySelectorAll('.img-p-off')
-        imgs.forEach((img, index) => {
-            refreshImage(img)
-                .then(res=>res)
-        });
-        
-        const $btnGen = document.querySelector('#show-image');
-        $btnGen.addEventListener('click',()=>{
-            const $imgToGen = document.querySelector('#image-generated');
-            const ID_TO_GEN_IMAGE = Math.floor(Math.random()*100) + 100;
-            const URL_IMAGE = `https://picsum.photos/id/${ID_TO_GEN_IMAGE}/600/400`;
-            const $inputImage = document.querySelector('#image');
-            $imgToGen.src = URL_IMAGE;
-            $imgToGen.style.display = 'block';
-            $inputImage.value = URL_IMAGE;
-            $inputImage.setAttribute('disabled',true)
-
-        })
-    })
-</script>
-</body>
-
-</html>
+   <footer class="footer">
+      <div class="social">
+         <div class="cont-social">
+            <div>
+               <iconify-icon icon="akar-icons:facebook-fill"></iconify-icon>
+            </div>
+            <span>
+               Facebook
+            </span>
+         </div>
+         <div class="cont-social">
+            <div>
+               <iconify-icon icon="akar-icons:twitter-fill"></iconify-icon>
+            </div>
+            <span>
+               Twitter
+            </span>
+         </div>
+         <div class="cont-social">
+            <div>
+               <iconify-icon icon="akar-icons:instagram-fill"></iconify-icon>
+            </div>
+            <span>
+               Instagram
+            </span>
+         </div>
+      </div>
+      <p>© 2025 Todos los derechos reservados.</p>
+   </footer>
+</div> <!-- Close container -->
