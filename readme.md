@@ -1,4 +1,4 @@
-# NodeApp
+# NodePop
 
 ## Installation
 
