@@ -88,9 +88,10 @@ router.post('/add', [
             //validaciones
             const validations = validationResult(req);
             if (!validations.isEmpty()) {
-                console.log({ errors: validations.array() });
-                res.redirect('/products')
-                return
+                validations.throw()
+                // console.log({ errors: validations.array() });
+                // res.redirect('/products')
+                // return
             }
             //lógica para add
             const { name, price, image, tags } = req.body
@@ -98,7 +99,7 @@ router.post('/add', [
                 ? [tags]
                 : tags
                 ?? [];
-            const user = await User.findById(req.session.userID);
+            // const user = await User.findById(req.session.userID);
             const tagsDB = await Tag.find();
             const newProduct = {
                 name,

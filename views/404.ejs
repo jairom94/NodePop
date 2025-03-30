@@ -6,9 +6,17 @@
                     <img src="../imgs/404.png" alt="Not found">
                 </figure>
                 <p>
-                    No encuentro lo que buscas
+                    <% if (errors) { %>
+                        <ul>
+                            <% errors.forEach(e=> { %>
+                                <li>
+                                    <%= e %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                        <% } %>
                 </p>
-                <div class="go-home"> 
+                <div class="go-home">
                     <a href="/">
                         <div>
                             <iconify-icon icon="octicon:home"></iconify-icon>
@@ -22,4 +30,4 @@
         </section>
     </main>
     <%- include('partials/footer.ejs') %>
-    <%- include('scripts/script_home.ejs') %>
+        <%- include('scripts/script_home.ejs') %>

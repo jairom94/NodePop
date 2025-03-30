@@ -4,6 +4,7 @@ import path from 'node:path';
 // import session from 'express-session';
 import connectMongoose from './lib/connectMongoose.js';
 import * as sessionManager from './lib/sessionManager.js';
+import * as messagesManager from './lib/messageFlash.js';
 
 import indexRouter from './routes/index.js';
 import loginRouter from './routes/login.js';
@@ -31,6 +32,8 @@ app.use(express.json());
 
 app.use(sessionManager.middleware);
 app.use(sessionManager.useSessionInViews);
+app.use(messagesManager.flashActivate);
+app.use(messagesManager.useErrorMessages);
 
 app.use('/',indexRouter);
 app.use('/login',loginRouter);
@@ -40,8 +43,21 @@ app.use(sessionManager.guard); //login required
 app.use('/profile',profileRouter);
 app.use('/products',productRouter);
 
-app.use((req,res,next)=>{
-    res.render('404')
+app.use((err,req,res,next)=>{
+    const we = {
+        type: 'field',
+        value: undefined,
+        msg: 'must be choose min one tag',
+        path: 'tags',
+        location: 'body'
+    }
+    if(err.array){
+        console.log(req.url)
+        res.locals.errors = err.array().map(e =>`${e.path} ${e.msg}`)
+        res.redirect('/products')
+        return
+    }
+    res.status(404).render('404')
 })
 
 
