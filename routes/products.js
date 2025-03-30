@@ -55,6 +55,19 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+//View a product
+router.get('/:productID', async (req, res, next) => {
+    try {
+        const { productID } = req.params;
+        const product = await Product.findOne({ _id: productID })
+            .populate('tags', 'name -_id');
+        res.locals.product = product
+        res.render('product')
+    } catch (error) {
+        next(error)
+    }
+})
+
 //Add product
 router.post('/add', [
     body('name')
@@ -133,7 +146,7 @@ router.get('/delete/:id', [
 //Filter Products
 router.get('/user/:userID/filter', async (req, res, next) => {
     try {
-        const { name, tags } = req.query;
+        const { name, min, max, tags } = req.query;
         const page = req.query.page ? parseInt(req.query.page) : 1;
         const items = 6;
         const tagsArray = (typeof tags === 'string')
@@ -147,8 +160,9 @@ router.get('/user/:userID/filter', async (req, res, next) => {
         if (name) {
             query.name = { $regex: regex };
         }
-        if (name) {
-            query.name = { $regex: regex };
+        if (min && max) {
+            query.price = { $gte: Number(min), $lte: Number(max) };
+            console.log(query.price)
         }
         if (tagsArray.length > 0) {
             query.tags = { $in: tagsArray.map(t_name => funcTools.getTagID(tagsDB, t_name)) }

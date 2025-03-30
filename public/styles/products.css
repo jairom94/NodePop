@@ -206,6 +206,13 @@ main.cont-products-n {
                             overflow: hidden;
                             text-overflow: ellipsis;
                             width: 95%;
+                            > a {
+                                color: inherit;
+                                transition: all .3s ease;
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
                         }
 
                         >div.detail {

@@ -26,8 +26,8 @@
                             <legend>Range Price</legend>
                             <fieldset class="range">
                                 <div id="steps-slider"></div>
-                                <input  type="hidden" id="price-min" value="<%= rangePrice.min %>">
-                                <input  type="hidden" id="price-max" value="<%= rangePrice.max %>">
+                                <input  type="hidden" id="price-min" name="min" value="<%= rangePrice.min %>">
+                                <input  type="hidden" id="price-max" name="max" value="<%= rangePrice.max %>">
                             </fieldset>
     
                         </div>
@@ -71,7 +71,9 @@
                                 </div>
                                 <figcaption>
                                     <div class="name-product">
-                                        <%= product.name %>
+                                        <a href="/products/<%= product._id %>">
+                                            <%= product.name %>
+                                        </a>
                                     </div>
                                     <div class="detail">
                                         <div class="price">
