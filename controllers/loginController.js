@@ -31,6 +31,6 @@ export const logout = (req,res,next)=>{
             next(err)
             return
         }
-        res.redirect("/login");       
+        res.redirect("/");       
     })
 }

@@ -71,23 +71,37 @@
                         </span>
                     </a>
                 </li>
+                <% if (!session.userID) { %>
                 <li>
-                    <a href="/login">
-                        <div>
-                            <iconify-icon icon="mdi:login-variant"></iconify-icon>
-                        </div>
-                        <span>
-                            Login
-                        </span>
-                    </a>
+                    
+                        <a href="/login">
+                            <div>
+                                <iconify-icon icon="mdi:login-variant"></iconify-icon>
+                            </div>
+                            <span>
+                                Login
+                            </span>
+                        </a>
                 </li>
                 <li>
-                    <a href="/shop">
+                    
+                    <a href="/register">
+                        <div>
+                            <iconify-icon icon="gg:airplane"></iconify-icon>
+                        </div>
+                        <span>
+                            Register
+                        </span>
+                    </a>
+            </li>
+                <% } %>
+                <li>
+                    <a href="/products">
                         <div>
                             <iconify-icon icon="mdi:shop"></iconify-icon>
                         </div>
                         <span>
-                            Tienda
+                            Products
                         </span>
                     </a>
                 </li>
@@ -101,37 +115,29 @@
                             Profile
                         </span>
                     </a>
-                </li>
-                <li>
-                    <a href="/logout">
-                        <div>
-                            <iconify-icon icon="mdi:logout-variant"></iconify-icon>
-                        </div>
-                        <span>
-                            Logout
-                        </span>
-                    </a>
-                </li>
+                </li>                
             </ul>
             <div class="user-detail">
-                <div>
+                <% if (session.userID) { %>                 
                     <div>
-                        <p class="username">
-                            <%= session.fullname %>
-                        </p>
-                        <a href="/logout">
-                            <div>
-                                <iconify-icon icon="mdi:logout-variant"></iconify-icon>
-                            </div>
-                            <span>
-                                Cerrar Sesión
-                            </span>
-                        </a>
+                        <div>
+                            <p class="username">
+                                <%= session.fullname %>
+                            </p>
+                            <a href="/logout">
+                                <div>
+                                    <iconify-icon icon="mdi:logout-variant"></iconify-icon>
+                                </div>
+                                <span>
+                                    Cerrar Sesión
+                                </span>
+                            </a>
+                        </div>
+                        <div>
+                            <iconify-icon icon="mdi:user-circle"></iconify-icon>
+                        </div>
                     </div>
-                    <div>
-                        <iconify-icon icon="mdi:user-circle"></iconify-icon>
-                    </div>
-                </div>
+                <% } %>
             </div>
         </nav>
         </div>
@@ -171,7 +177,7 @@
                                     <iconify-icon icon="akar-icons:shopping-bag"></iconify-icon>
                                 </div>
                                 <span>
-                                    Product
+                                    Products
                                 </span>
                             </a>
                         </li>
