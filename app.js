@@ -40,5 +40,9 @@ app.use(sessionManager.guard); //login required
 app.use('/profile',profileRouter);
 app.use('/products',productRouter);
 
+app.use((req,res,next)=>{
+    res.render('404')
+})
+
 
 export default app;
