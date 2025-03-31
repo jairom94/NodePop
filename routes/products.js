@@ -114,7 +114,7 @@ router.post('/add', [
         }
     });
 
-//Delete product -> Falta implementar delegacion de errores
+//Delete product
 router.get('/delete/:id', [
     query('allow')
         .notEmpty()
@@ -198,6 +198,17 @@ router.get('/user/:userID/filter', async (req, res, next) => {
         // res.locals.products = ProductsFilter;
         res.locals.tags = tagsDB;
         res.render('products')
+    } catch (error) {
+        next(error)
+    }
+})
+
+//Update product
+router.patch('/update/:id',async(req,res,next)=>{
+    try {
+        const { id } = req.params;
+        console.log('editando',id)
+        res.redirect('/products')
     } catch (error) {
         next(error)
     }

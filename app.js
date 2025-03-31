@@ -43,7 +43,7 @@ app.use('/logout',logoutRouter);
 app.use('/register',registerRouter);
 app.use(sessionManager.guard); 
 app.use('/profile',profileRouter);
-app.use('/products',productRouter);
+app.use('/products',productRouter); //Reparar la paginacion al filtrado
 
 
 app.use((req,res,next)=>{   
