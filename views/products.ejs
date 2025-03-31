@@ -19,12 +19,16 @@
                 });
             </script>
             <% } %>
-                <section class="modal-add-product">
-                    <button popovertarget="modal-add-product" id="btn-open-modal">ADD PRODUCT</button>
-                    <dialog id="modal-add-product" popover>
-                        <div class="cont-form">
-                            <%- include('partials/frmAddProduct.ejs') %>
-                        </div>
+                <section class="add-product">
+                    <button id="btn-open-modal"
+                        onclick="document.querySelector('#modal-add-product').showModal()">
+                        ADD PRODUCT
+                    </button>
+                    <!-- <button popovertarget="modal-add-product" id="btn-open-modal">ADD PRODUCT</button> -->
+                    <dialog class="modal-add-product" id="modal-add-product">
+                        <%- include('partials/frmAddProduct.ejs') %>
+                        <!-- <div class="cont-form">
+                        </div> -->
                     </dialog>
                 </section>
                 <section class="filter-products">
@@ -75,15 +79,16 @@
                                         <div class="cont-img-product">
                                             <img class="img-p" src="<%= product.image %> " alt="<%= product.name %>">
                                             <div class="overlay">
-                                                <div class="actions">
-                                                    <!-- action="/products/product.id" method="delete" -->
+                                                <div class="actions">                                                    
                                                     <button class="btn btn-danger"
                                                         onclick="document.querySelector('#modal-delete-<%= product._id %>').showModal()">
                                                         Delete
                                                     </button>
-                                                    <button class="btn btn-secondary">Edit</button>
-                                                    <!-- <input type="submit" class="btn btn-secondary" value="Editar"> -->
-                                                    <!-- <input type="submit" class="btn btn-danger" value="Eliminar"> -->
+                                                    <button class="btn btn-secondary"
+                                                        onclick="document.querySelector('#modal-update-<%= product._id %>').showModal()">
+                                                        Edit
+                                                    </button>
+                                                    <!-- <button class="btn btn-secondary">Edit</button>                                                     -->
                                                 </div>
                                             </div>
                                         </div>
@@ -110,28 +115,10 @@
                                         </figcaption>
                                     </figure>
                                     <dialog class="modal-delete" id="modal-delete-<%= product._id %>">
-                                        <h2>
-                                            <div>
-                                                <iconify-icon icon="ic:baseline-railway-alert"></iconify-icon>
-                                            </div>
-                                            <span>Alert</span>
-                                        </h2>
-                                        <form action="/products/delete/<%= product.id %>" method="get">
-                                            <p>
-                                                Esta seguro de borrar el producto:<br>
-                                                <%= product.name %>
-                                            </p>
-                                            <input type="hidden" name="allow" value="true">
-                                            <div>
-                                                <button type="submit" id="allow-delete">Aceptar</button>
-                                                <button type="button" class="close-modal"
-                                                    onclick="this.closest('dialog').close()">Cancelar</button>
-                                                <!-- <form method="dialog">
-                                            <button class="close-modal">Cancelar</button>
-                                        </form>                                     -->
-                                            </div>
-
-                                        </form>
+                                        <%- include('partials/frmDeleteProduct.ejs',{product}) %>
+                                    </dialog>
+                                    <dialog class="modal-update" id="modal-update-<%= product._id %>">
+                                        <%- include('partials/frmEditProduct.ejs',{product,tags}) %>
                                     </dialog>
                                 </li>
                                 <% }); %>
@@ -158,4 +145,4 @@
                 </section>
     </main>
     <%- include('partials/footer.ejs') %>
-        <%- include('scripts/script_products.ejs') %>
+    <%- include('scripts/script_products.ejs',{tags}) %>

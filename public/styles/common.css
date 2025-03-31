@@ -19,6 +19,7 @@
     --bg-red-vintage:#E50046;
     --bg-white-bone:#FAF6E3;
     --bg-blue: #295F98;
+    --bg-blue-vintage: #3773b3;
     --bg-blue-light: #536493;
     --bg-green:#399918;
     --bg-green-light:#597445;
@@ -101,7 +102,7 @@ figure {
 .btn-secondary {
     background-color: var(--bg-blue);
     &:hover{
-        background-color: var(--color-success);
+        background-color: var(--bg-blue-vintage);
     }
 }
 

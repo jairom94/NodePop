@@ -1,3 +1,7 @@
+<div class="cont-form">
+    <button type="button" class="btn btn-danger close-modal" onclick="this.closest('dialog').close()">
+        X
+    </button>
 <form action="/products/add" method="post">
     <div>
         <h2>ADD PRODUCT</h2>
@@ -43,6 +47,7 @@
     </div>
     <div class="cont-btns">
         <button class="btn btn-primary" type="submit">Guardar</button>
-        <button class="btn btn-danger" type="reset" id="btnResetAdd">Reset</button>
+        <button class="btn btn-secondary" type="reset" id="btnResetAdd">Reset</button>
     </div>
 </form>
+</div>

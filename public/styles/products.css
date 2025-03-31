@@ -4,113 +4,156 @@ main.cont-products-n {
     align-self: stretch;
     padding-top: 100px;    
     >section.add-product {
-        >div.cont-form {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 0 2rem;
-
-            >form {
-                /* background-color: yellowgreen; */
-                display: flex;
-                justify-content: center;
-                align-items: stretch;
-                flex-direction: column;
-                gap: .5rem;
-                padding: .7rem 0;
-
-                >div.cont-btns {
-                    display: flex;
-                    flex-direction: row;
-                }
-
-                >div {
-                    display: flex;
-                    flex-direction: column;
-                    gap: .3rem;
-                    color: var(--color-text-primary);
-
-                    >input[type="text"] {
-                        border-radius: .3rem;
-                        background-color: var(--color-secondary);
-                        border: none;
-                        padding: .5rem .6rem;
-                        transition: all .3s ease;
-                        color: var(--color-text-secondary);
-
-                        &:focus {
-                            outline: none;
-                            border-bottom: 2px solid var(--color-text-secondary);
-                            border-radius: .3rem .3rem 0 0;
-                        }
-                    }
-
-                    >select {
-                        border-radius: .3rem;
-                        background-color: var(--color-secondary);
-                        appearance: none;
-                        border: 0;
-                        outline: 0;
-                        font: inherit;
-                        width: 100%;
-                        padding: .5rem 4rem .5rem 1rem;
-                        background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
-                            linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
-                        border-radius: 0.3rem;
-                        box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-                        cursor: pointer;
-                        /* padding: .5rem .6rem; */
-                        color: var(--color-text-primary);
-
-                        &:focus {
-                            outline: none;
-                        }
-
-                        option {
-                            color: inherit;
-                            background-color: var(--color-warning);
-                        }
-                    }
-
-                    >fieldset {
-                        display: flex;
-                        flex-direction: column;
-                        gap: .25rem;
-                        border-radius: .3rem;
-                    }
-                }
-            }
-        }
-    }
-
-    >section.modal-add-product {
         padding-bottom: 1rem;
         padding: 0 1rem 1rem 1rem;
-        >button {
-            transition: transform 0.2s;
+        > button#btn-open-modal {
+            display: inline-block;
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: var(--option-bg);
+            box-shadow: 1px 1px 4px var(--bg-black-light),
+                -1px -1px 4px var(--bg-black);
+            padding: .5rem 0;
+            /* text-align: center; */
+            transition: all .3s ease;
+            cursor: pointer;
+            border-radius: .5rem;
+            &:hover {
+                background-color: var(--color-text-warning);
+            }
         }
-
-        >dialog {
+        /* >button {
+            transition: transform 0.2s;
+        } */
+        > dialog.modal-add-product{
             padding: 0;
             border: 1px solid var(--color-text-primary);
             border-radius: .3rem;
             /* overflow: hidden; */
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             animation: fadeIn 0.3s ease-out;
-            width: 80vw;
+            width: 80vw;            
 
             &::backdrop {
                 background-color: rgba(0, 0, 0, 0.5);
                 backdrop-filter: blur(5px);
             }
-        }
+            > div.cont-form {
+                border-radius: inherit;    
+                padding: 0 2rem;
+                background-color: var(--color-success);
+                position: relative;
+                > button.close-modal {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                }
+                >form {
+                    /* background-color: yellowgreen; */
+                    display: flex;
+                    justify-content: center;
+                    align-items: stretch;
+                    flex-direction: column;
+                    gap: .5rem;
+                    padding: .7rem 0;
+            
+                    >div.cont-btns {
+                        display: flex;
+                        flex-direction: row;
+                    }
+            
+                    >div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .3rem;
+                        color: var(--color-text-primary);
+            
+                        >input[type="text"],
+                        input[type="number"] {
+                            border-radius: .3rem;
+                            background-color: var(--color-secondary);
+                            border: none;
+                            padding: .5rem .6rem;
+                            transition: all .3s ease;
+                            color: var(--color-text-secondary);
+            
+                            &:focus {
+                                outline: none;
+                                border-bottom: 2px solid var(--color-text-secondary);
+                                border-radius: .3rem .3rem 0 0;
+                            }
+                        }
+            
+                        >input[type="number"] {
+                            appearance: textfield;
+                        }
+            
+                        >input[type="number"]::-webkit-outer-spin-button,
+                        >input[type="number"]::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+            
+            
+                        >select {
+                            border-radius: .3rem;
+                            background-color: var(--color-secondary);
+                            appearance: none;
+                            border: 0;
+                            outline: 0;
+                            font: inherit;
+                            width: 100%;
+                            padding: .5rem 4rem .5rem 1rem;
+                            background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+                                linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+                            border-radius: 0.3rem;
+                            box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+                            cursor: pointer;
+                            /* padding: .5rem .6rem; */
+                            color: var(--color-text-primary);
+            
+                            &:focus {
+                                outline: none;
+                            }
+            
+                            option {
+                                color: inherit;
+                                background-color: var(--color-warning);
+                            }
+                        }
+            
+                        >fieldset {
+                            display: flex;
+                            flex-direction: column;
+                            gap: .25rem;
+                            border-radius: .3rem;
+                        }
+                    }
+            
+                    >div:has(figure) {
+                        >figure {
+                            >div {
+                                >img {
+                                    border-radius: .3rem;
+                                    display: none;
+                                    width: 100%;
+                                    height: 200px;
+                                    aspect-ratio: 16/9;
+                                    object-fit: cover;
+                                    object-position: center center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }        
     }
 
     >section.products {
         /* background-color: blueviolet; */
         padding: 0 .3rem;
-
-        /* max-width: 80vw;
-        margin: 0 auto; */
         transition: all .3s ease;
         >h2 {
             font-family: 'Concert One', Arial, Helvetica, sans-serif;
@@ -239,6 +282,124 @@ main.cont-products-n {
                         }
                     }
                 }
+                >dialog.modal-update {
+                    padding: 0;
+                    border: 1px solid var(--color-text-primary);
+                    border-radius: .3rem;                    
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+                    animation: fadeIn 0.3s ease-out;
+                    width: 80vw;
+                    > div.cont-form {
+                        border-radius: inherit;    
+                        padding: 0 2rem;
+                        background-color: var(--color-success);
+                    
+                        >form {
+                            /* background-color: yellowgreen; */
+                            display: flex;
+                            justify-content: center;
+                            align-items: stretch;
+                            flex-direction: column;
+                            gap: .5rem;
+                            padding: .7rem 0;
+                    
+                            >div.cont-btns {
+                                display: flex;
+                                flex-direction: row;
+                            }
+                    
+                            >div {
+                                display: flex;
+                                flex-direction: column;
+                                gap: .3rem;
+                                color: var(--color-text-primary);
+                    
+                                >input[type="text"],
+                                input[type="number"] {
+                                    border-radius: .3rem;
+                                    background-color: var(--color-secondary);
+                                    border: none;
+                                    padding: .5rem .6rem;
+                                    transition: all .3s ease;
+                                    color: var(--color-text-secondary);
+                    
+                                    &:focus {
+                                        outline: none;
+                                        border-bottom: 2px solid var(--color-text-secondary);
+                                        border-radius: .3rem .3rem 0 0;
+                                    }
+                                }
+                    
+                                >input[type="number"] {
+                                    appearance: textfield;
+                                }
+                    
+                                >input[type="number"]::-webkit-outer-spin-button,
+                                >input[type="number"]::-webkit-inner-spin-button {
+                                    -webkit-appearance: none;
+                                    margin: 0;
+                                }
+                    
+                    
+                                >select {
+                                    border-radius: .3rem;
+                                    background-color: var(--color-secondary);
+                                    appearance: none;
+                                    border: 0;
+                                    outline: 0;
+                                    font: inherit;
+                                    width: 100%;
+                                    padding: .5rem 4rem .5rem 1rem;
+                                    background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+                                        linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+                                    border-radius: 0.3rem;
+                                    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+                                    cursor: pointer;
+                                    /* padding: .5rem .6rem; */
+                                    color: var(--color-text-primary);
+                    
+                                    &:focus {
+                                        outline: none;
+                                    }
+                    
+                                    option {
+                                        color: inherit;
+                                        background-color: var(--color-warning);
+                                    }
+                                }
+                    
+                                >fieldset {
+                                    > div {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: .25rem;
+                                        border-radius: .3rem;
+                                    }
+                                }
+                            }
+                    
+                            >div:has(figure) {
+                                >figure {
+                                    >div {
+                                        >img {
+                                            border-radius: .3rem;
+                                            /* display: none; */
+                                            width: 100%;
+                                            height: 200px;
+                                            aspect-ratio: 16/9;
+                                            object-fit: cover;
+                                            object-position: center center;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &::backdrop {
+                        background-color: rgba(0, 0, 0, 0.5);
+                        backdrop-filter: blur(5px);
+                    }
+                }
             }
         }
     }
@@ -346,23 +507,7 @@ main.cont-products-n {
     }
 }
 
-#btn-open-modal {
-    display: inline-block;
-    width: 100%;
-    border: none;
-    outline: none;
-    background-color: var(--option-bg);
-    box-shadow: 1px 1px 4px var(--bg-black-light),
-        -1px -1px 4px var(--bg-black);
-    padding: .5rem 0;
-    /* text-align: center; */
-    transition: all .3s ease;
-    cursor: pointer;
-    border-radius: .5rem;
-    &:hover {
-        background-color: var(--color-text-warning);
-    }
-}
+
 
 .modal-delete {
     border: none;
@@ -434,110 +579,6 @@ main.cont-products-n {
     }
 }
 
-div.cont-form {
-    border-radius: inherit;    
-    padding: 0 2rem;
-    background-color: var(--color-success);
-
-    >form {
-        /* background-color: yellowgreen; */
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        flex-direction: column;
-        gap: .5rem;
-        padding: .7rem 0;
-
-        >div.cont-btns {
-            display: flex;
-            flex-direction: row;
-        }
-
-        >div {
-            display: flex;
-            flex-direction: column;
-            gap: .3rem;
-            color: var(--color-text-primary);
-
-            >input[type="text"],
-            input[type="number"] {
-                border-radius: .3rem;
-                background-color: var(--color-secondary);
-                border: none;
-                padding: .5rem .6rem;
-                transition: all .3s ease;
-                color: var(--color-text-secondary);
-
-                &:focus {
-                    outline: none;
-                    border-bottom: 2px solid var(--color-text-secondary);
-                    border-radius: .3rem .3rem 0 0;
-                }
-            }
-
-            >input[type="number"] {
-                appearance: textfield;
-            }
-
-            >input[type="number"]::-webkit-outer-spin-button,
-            >input[type="number"]::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-
-
-            >select {
-                border-radius: .3rem;
-                background-color: var(--color-secondary);
-                appearance: none;
-                border: 0;
-                outline: 0;
-                font: inherit;
-                width: 100%;
-                padding: .5rem 4rem .5rem 1rem;
-                background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
-                    linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
-                border-radius: 0.3rem;
-                box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-                cursor: pointer;
-                /* padding: .5rem .6rem; */
-                color: var(--color-text-primary);
-
-                &:focus {
-                    outline: none;
-                }
-
-                option {
-                    color: inherit;
-                    background-color: var(--color-warning);
-                }
-            }
-
-            >fieldset {
-                display: flex;
-                flex-direction: column;
-                gap: .25rem;
-                border-radius: .3rem;
-            }
-        }
-
-        >div:has(figure) {
-            >figure {
-                >div {
-                    >img {
-                        border-radius: .3rem;
-                        display: none;
-                        width: 100%;
-                        height: 200px;
-                        aspect-ratio: 16/9;
-                        object-fit: cover;
-                        object-position: center center;
-                    }
-                }
-            }
-        }
-    }
-}
 
 div.pagination {
     padding-top: 2rem;

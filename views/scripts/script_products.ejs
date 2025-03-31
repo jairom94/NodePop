@@ -13,6 +13,32 @@
             console.error("Error:", error);
         }
     }
+
+    function resetProduct(el,product_id) {
+            // console.log(product_id)
+            const products = <%- JSON.stringify(pagination.products) %>;            
+            const product = products.find(p => p._id === product_id);            
+            const $imgEdit = document.querySelector(`#image-generated-edit-${product_id}`);
+            $imgEdit.src = product.image;
+            const $nameEdit = document.querySelector(`#name-edit-${product_id}`);
+            $nameEdit.value = product.name;
+            const $imageEdit = document.querySelector(`#image-edit-${product_id}`);
+            $imageEdit.value = product.image;
+            const $priceEdit = document.querySelector(`#price-edit-${product_id}`);
+            $priceEdit.value = product.price;
+            const $contTags = document.querySelector(`#tags-edit-${product_id}`);
+            const tags = <%- JSON.stringify(tags) %>;
+            $contTags.innerHTML = tags.map(t => (
+                `
+                    <label>
+                        <input type='checkbox' name='tags' value='${t.name}'
+                        ${product.tags.map(tc=>tc.name).includes(t.name) ? 'checked' : ''}>
+                        ${t.name}
+                    </label>
+                `
+            )).join(' ');
+            el.closest('dialog').close();
+    }
     document.addEventListener('DOMContentLoaded', () => {
         const $resetBtnAdd = document.querySelector('#btnResetAdd');
         $resetBtnAdd.addEventListener('click',()=>{
@@ -26,19 +52,35 @@
             refreshImage(img)
                 .then(res => res)
         });
-
-        const $btnGen = document.querySelector('#show-image');
-        $btnGen.addEventListener('click', () => {
-            const $imgToGen = document.querySelector('#image-generated');
+        const genNewImage = ($img,$inputToImage) => {
+            // const $img = document.querySelector('#image-generated');
             const ID_TO_GEN_IMAGE = Math.floor(Math.random() * 100) + 100;
             const URL_IMAGE = `https://picsum.photos/id/${ID_TO_GEN_IMAGE}/600/400`;
-            const $inputImage = document.querySelector('#image');
-            $imgToGen.src = URL_IMAGE;
-            $imgToGen.style.display = 'block';
-            $inputImage.value = URL_IMAGE;
+            // const $inputToImage = document.querySelector('#image');
+            $img.src = URL_IMAGE;
+            $img.style.display = 'block';
+            $inputToImage.value = URL_IMAGE;
+        }
+        const $btnGen = document.querySelector('#show-image');
+        $btnGen.addEventListener('click', () => {
+            const $imgToAdd = document.querySelector('#image-generated');
+            const $inputToImageAdd = document.querySelector('#image');
+            genNewImage($imgToAdd,$inputToImageAdd)
             // $inputImage.setAttribute('disabled',true)
 
         });
+
+        const $btnGenToEdit = document.querySelector('#show-image-edit');
+        $btnGenToEdit.addEventListener('click', () => {
+            const $imgToEdit = document.querySelector('#image-generated-edit');
+            const $inputToImageEdit = document.querySelector('#image-edit');
+            genNewImage($imgToEdit,$inputToImageEdit)
+            // $inputImage.setAttribute('disabled',true)
+        });
+        
+        
+        
+
 
         const stepsSlider = document.querySelector("#steps-slider");
         const input0 = document.querySelector("#price-min");
