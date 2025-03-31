@@ -25,6 +25,6 @@ Install dependencies with:
 
 <img src="assets-readme/add-product.png" width="200" alt="login view">
 
- > To delete a product you must do hover on image to product
+ > To delete a product you must do hover on image product
 
  <img src="assets-readme/delete-product.png" width="200" alt="delete a product">
