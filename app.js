@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import path from 'node:path';
+import createHttpError from 'http-errors';
 // import session from 'express-session';
 import connectMongoose from './lib/connectMongoose.js';
 import * as sessionManager from './lib/sessionManager.js';
@@ -35,29 +36,42 @@ app.use(sessionManager.useSessionInViews);
 app.use(messagesManager.flashActivate);
 app.use(messagesManager.useErrorMessages);
 
+//Rutas de la app
 app.use('/',indexRouter);
 app.use('/login',loginRouter);
 app.use('/logout',logoutRouter);
 app.use('/register',registerRouter);
-app.use(sessionManager.guard); //login required
+app.use(sessionManager.guard); 
 app.use('/profile',profileRouter);
 app.use('/products',productRouter);
 
+
+app.use((req,res,next)=>{   
+    //Registro de error 404 
+    next(createHttpError(404))
+});
+
+
 app.use((err,req,res,next)=>{
-    const we = {
-        type: 'field',
-        value: undefined,
-        msg: 'must be choose min one tag',
-        path: 'tags',
-        location: 'body'
-    }
     if(err.array){
-        console.log(req.url)
-        res.locals.errors = err.array().map(e =>`${e.path} ${e.msg}`)
-        res.redirect('/products')
-        return
+        if (req.url.startsWith('/products/')) {            
+            const errors = err.array().map(e =>`${e.path} ${e.msg}`)
+            const title = `We can´t ${req.url.split('/')[2]} product`
+            req.flash('error',errors);            
+            res.redirect('/products')
+            return
+        }
     }
-    res.status(404).render('404')
+
+    // Atrapando error 404
+    if (err.status === 404) {
+        res.status(404).render('404');
+        return 
+    }
+
+    //Respuesta para resto de errores
+    res.locals.error = err
+    res.status(err.status || 500).render('error');
 })
 
 

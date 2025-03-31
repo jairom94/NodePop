@@ -72,16 +72,16 @@ router.get('/:productID', async (req, res, next) => {
 router.post('/add', [
     body('name')
         .notEmpty()
-        .withMessage('name is required'),
+        .withMessage('is required'),
     body('price')
         .notEmpty()
-        .withMessage('price is required'),
+        .withMessage('is required'),
     body('image')
         .notEmpty()
-        .withMessage('image is required'),
+        .withMessage('is required'),
     body('tags')
         .notEmpty()
-        .withMessage('must be choose min one tag')
+        .withMessage('at least one must be chosen')
 ],
     async (req, res, next) => {
         try {
@@ -89,9 +89,6 @@ router.post('/add', [
             const validations = validationResult(req);
             if (!validations.isEmpty()) {
                 validations.throw()
-                // console.log({ errors: validations.array() });
-                // res.redirect('/products')
-                // return
             }
             //lógica para add
             const { name, price, image, tags } = req.body
@@ -123,14 +120,13 @@ router.get('/delete/:id', [
         .notEmpty()
         .withMessage('not must be empty')
         .custom((value) => value === 'true')
-        .withMessage('not allow to delete product'),
+        .withMessage('we can´t delete this product'),
 ],
     async (req, res, next) => {
         try {
             const resultValidations = validationResult(req);
             if (!resultValidations.isEmpty()) {
-                console.log({ errors: resultValidations.array() })
-                return
+                resultValidations.throw()
             }
             const { id } = req.params;
             const { allow } = req.query;

@@ -2,7 +2,7 @@ main.cont-products-n {
     font-family: 'Cairo', Arial, Helvetica, sans-serif;
     flex-grow: 1;
     align-self: stretch;
-    padding-top: 100px;
+    padding-top: 100px;    
     >section.add-product {
         >div.cont-form {
             max-width: 700px;
@@ -267,8 +267,8 @@ main.cont-products-n {
             +label {
                 display: inline-block;
                 background-color: var(--option-bg);
-                box-shadow: 6px 6px 10px #bebebe,
-                    -6px -6px 10px #fff;
+                box-shadow: 1px 1px 4px var(--bg-black-light),
+                    -1px -1px 4px var(--bg-black);
                 padding: .5rem 0;
                 width: 100%;
                 text-align: center;
@@ -352,8 +352,8 @@ main.cont-products-n {
     border: none;
     outline: none;
     background-color: var(--option-bg);
-    box-shadow: 6px 6px 10px #bebebe,
-        -6px -6px 10px #fff;
+    box-shadow: 1px 1px 4px var(--bg-black-light),
+        -1px -1px 4px var(--bg-black);
     padding: .5rem 0;
     /* text-align: center; */
     transition: all .3s ease;
@@ -420,6 +420,9 @@ main.cont-products-n {
             button.close-modal {
                 background-color: var(--bg-red-vintage);
                 color: var(--bg-white-bone);
+                &:hover {
+                    background-color: var(--bg-red-light);
+                }
             }
 
         }
@@ -432,9 +435,7 @@ main.cont-products-n {
 }
 
 div.cont-form {
-    border-radius: inherit;
-    /* max-width: 700px;
-    margin: 0 auto; */
+    border-radius: inherit;    
     padding: 0 2rem;
     background-color: var(--color-success);
 

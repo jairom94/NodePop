@@ -24,6 +24,7 @@
     --bg-green-light:#597445;
     --bg-black:#000;
     --bg-red-dark:#8E1616;
+    --bg-red-light:#a42727;
     --bg-black-primary:#2d2d2d;
     --bg-black-light:#393E46;
 
@@ -98,16 +99,16 @@ figure {
 }
 
 .btn-secondary {
-    background-color: var(--color-text-danger);
+    background-color: var(--bg-blue);
     &:hover{
         background-color: var(--color-success);
     }
 }
 
 .btn-danger{
-    background-color: var(--color-danger);
+    background-color: var(--bg-red-dark);
     &:hover{
-        background-color: var(--color-warning);
-        color: var(--color-primary);
+        background-color: var(--bg-red-light);
+        /* color: var(--color-primary); */
     }
 }
