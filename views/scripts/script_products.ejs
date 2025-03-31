@@ -32,7 +32,7 @@
                 `
                     <label>
                         <input type='checkbox' name='tags' value='${t.name}'
-                        ${product.tags.map(tc=>tc.name).includes(t.name) ? 'checked' : ''}>
+                        ${product.tags.map(tg=>tg.name).includes(t.name) ? 'checked' : ''}>
                         ${t.name}
                     </label>
                 `

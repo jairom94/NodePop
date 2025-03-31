@@ -12,8 +12,8 @@ main.cont-products-n {
             border: none;
             outline: none;
             background-color: var(--option-bg);
-            box-shadow: 1px 1px 4px var(--bg-black-light),
-                -1px -1px 4px var(--bg-black);
+            box-shadow: 1px 1px 4px #bebebe,
+                -1px -1px 4px #bebebe;
             padding: .5rem 0;
             /* text-align: center; */
             transition: all .3s ease;
@@ -428,8 +428,8 @@ main.cont-products-n {
             +label {
                 display: inline-block;
                 background-color: var(--option-bg);
-                box-shadow: 1px 1px 4px var(--bg-black-light),
-                    -1px -1px 4px var(--bg-black);
+                box-shadow: 1px 1px 4px #bebebe,
+                    -1px -1px 4px #bebebe;
                 padding: .5rem 0;
                 width: 100%;
                 text-align: center;
