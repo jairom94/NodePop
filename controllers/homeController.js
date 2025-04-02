@@ -1,19 +1,26 @@
-import Product from "../models/Product.js";
-import Tag from "../models/Tag.js";
+import Product from '../models/Product.js';
+import * as funcTools from '../lib/funcTools.js';
+import Tag from '../models/Tag.js';
 
 
-export const index = (req, res, next) => {
-    res.render('home');
-}
-
-export const profile = async (req, res, next) => {
+export const index = async (req, res, next) => {
     try {
-        // const user = req.session.userID;        
-        // res.locals.products = await Product.find({ owner: user }).populate('tags', 'name -_id');
-        // res.locals.tags = await Tag.find()
-        res.render('profile');
+        const tags = await Tag.find();
+        const tagMotor = ['motor'];
+        const productsMotor = await Product.find({
+            tags: { $in:tagMotor.map(t => funcTools.getTagID(tags,t)) }
+        }).limit(3);
+        const tagLifestyle = ['lifestyle'];
+        const productsLifestyle = await Product.find({
+            tags: { $in:tagLifestyle.map(t => funcTools.getTagID(tags,t)) }
+        }).limit(3);
+        res.locals.productsMotor = productsMotor;
+        res.locals.productsLifestyle = productsLifestyle;
+        res.render('home');    
     } catch (error) {
         next(error)
     }
+    
 }
+
 

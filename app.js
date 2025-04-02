@@ -14,6 +14,7 @@ import profileRouter from './routes/profile.js';
 import logoutRouter from './routes/logout.js';
 import productRouter from './routes/products.js';
 
+
 await connectMongoose();
 console.log('Success connect to MongoDB');
 
@@ -53,6 +54,8 @@ app.use((req,res,next)=>{
 
 
 app.use((err,req,res,next)=>{
+    console.log(err);
+    
     if(err.array){
         if (req.url.startsWith('/products/')) {            
             const errors = err.array().map(e =>`${e.path} ${e.msg}`)

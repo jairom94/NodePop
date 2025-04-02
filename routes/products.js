@@ -1,72 +1,17 @@
 import express from 'express';
-import User from '../models/User.js';
-import Tag from '../models/Tag.js';
-import Product from '../models/Product.js';
-import * as funcTools from '../lib/funcTools.js';
-import { body, query, validationResult } from 'express-validator';
-import mongoose from 'mongoose';
+import { body, query } from 'express-validator';
+
+
+import { productDetail,productsGet,addProduct,deleteProduct,updateProduct } from '../controllers/productController.js';
 
 
 const router = express.Router();
 
-//View Porducts By User
-router.get('/', async (req, res, next) => {
-    try {
-        const page = req.query.page ? parseInt(req.query.page) : 1;
-        const items = 6;
-        const user = req.session.userID;
-        // res.locals.products
-        // console.log(page)
-        const products = await Product.find({ owner: user })
-            .skip((page - 1) * items)
-            .limit(items)
-            .populate('tags', 'name -_id');
-        const totalDocs = await Product.find({ owner: user }).countDocuments();
-        const totalPages = Math.ceil(totalDocs / items);
-
-        const [minMax] = await Product.aggregate([
-            {
-                $match: {
-                    owner: new mongoose.Types.ObjectId(user)
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    minPrice: { $min: "$price" },
-                    maxPrice: { $max: "$price" }
-                }
-            }
-        ]);
-        res.locals.rangePrice = minMax
-            ? { min: minMax.minPrice, max: minMax.maxPrice }
-            : { min: 0, max: 100 }
-        // console.log(minMax)
-        res.locals.pagination = {
-            products,
-            page,
-            totalPages,
-            totalItems: totalDocs,
-        }
-        res.locals.tags = await Tag.find();
-        res.render('products')
-    } catch (error) {
-        next(error)
-    }
-});
+//View Products By User
+router.get('/', productsGet );
 
 //View a product
-router.get('/:productID', async (req, res, next) => {
-    try {
-        const { productID } = req.params;
-        const product = await Product.findOne({ _id: productID })
-            .populate('tags', 'name -_id');
-        res.locals.product = product
-        res.render('product')
-    } catch (error) {
-        next(error)
-    }
-})
+router.get('/:productID', productDetail)
 
 //Add product
 router.post('/add', [
@@ -83,36 +28,7 @@ router.post('/add', [
         .notEmpty()
         .withMessage('at least one must be chosen')
 ],
-    async (req, res, next) => {
-        try {
-            //validaciones
-            const validations = validationResult(req);
-            if (!validations.isEmpty()) {
-                validations.throw()
-            }
-            //lógica para add
-            const { name, price, image, tags } = req.body
-            const tagsArray = (typeof tags === 'string')
-                ? [tags]
-                : tags
-                ?? [];
-            // const user = await User.findById(req.session.userID);
-            const tagsDB = await Tag.find();
-            const newProduct = {
-                name,
-                price,
-                owner: req.session.userID,
-                image,
-                tags: tagsArray.map(tag_name => funcTools.getTagID(tagsDB, tag_name))
-            }
-            console.log(newProduct)
-            const productInsert = await Product.insertOne(newProduct);
-            console.log(productInsert)
-            res.redirect('/products');
-        } catch (error) {
-            next(error)
-        }
-    });
+    addProduct);
 
 //Delete product
 router.get('/delete/:id', [
@@ -122,96 +38,9 @@ router.get('/delete/:id', [
         .custom((value) => value === 'true')
         .withMessage('we can´t delete this product'),
 ],
-    async (req, res, next) => {
-        try {
-            const resultValidations = validationResult(req);
-            if (!resultValidations.isEmpty()) {
-                resultValidations.throw()
-            }
-            const { id } = req.params;
-            const { allow } = req.query;
-            if (allow) {
-                const productDelete = await Product.deleteOne({ _id: id })
-                console.log(productDelete)
-                res.redirect('/products')
-            }
-        } catch (error) {
-            next(error)
-        }
-    });
-
-//Filter Products
-router.get('/user/:userID/filter', async (req, res, next) => {
-    try {
-        const { name, min, max, tags } = req.query;
-        const page = req.query.page ? parseInt(req.query.page) : 1;
-        const items = 6;
-        const tagsArray = (typeof tags === 'string')
-            ? [tags]
-            : tags
-            ?? [];
-        const regex = new RegExp(`^${name}`, "i");
-        const user = req.session.userID;
-        const tagsDB = await Tag.find();
-        const query = { owner: user }
-        if (name) {
-            query.name = { $regex: regex };
-        }
-        if (min && max) {
-            query.price = { $gte: Number(min), $lte: Number(max) };
-            console.log(query.price)
-        }
-        if (tagsArray.length > 0) {
-            query.tags = { $in: tagsArray.map(t_name => funcTools.getTagID(tagsDB, t_name)) }
-        }
-        const ProductsFilter = await Product.find(query)
-            .skip((page - 1) * items)
-            .limit(items)
-            .populate('tags', 'name -_id');
-
-        const [minMax] = await Product.aggregate([
-            {
-                $match: {
-                    owner: new mongoose.Types.ObjectId(user)
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    minPrice: { $min: "$price" },
-                    maxPrice: { $max: "$price" }
-                }
-            }
-        ]);
-        res.locals.rangePrice = minMax
-            ? { min: minMax.minPrice, max: minMax.maxPrice }
-            : { min: 0, max: 100 }
-
-        const totalDocs = await Product.find(query).countDocuments();
-        const totalPages = Math.ceil(totalDocs / items)
-        res.locals.pagination = {
-            products: ProductsFilter,
-            page,
-            totalPages,
-            totalItems: totalDocs,
-        }
-        // res.locals.products = ProductsFilter;
-        res.locals.tags = tagsDB;
-        res.render('products')
-    } catch (error) {
-        next(error)
-    }
-})
+    deleteProduct);
 
 //Update product
-router.patch('/update/:id',async(req,res,next)=>{
-    try {
-        const { id } = req.params;
-        console.log('editando',id)
-        res.redirect('/products')
-    } catch (error) {
-        next(error)
-    }
-})
+router.post('/update/:id',updateProduct)
 
 export default router;

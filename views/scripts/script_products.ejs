@@ -36,7 +36,7 @@
                         ${t.name}
                     </label>
                 `
-            )).join(' ');
+            )).join('');
             el.closest('dialog').close();
     }
     document.addEventListener('DOMContentLoaded', () => {
@@ -78,6 +78,19 @@
             // $inputImage.setAttribute('disabled',true)
         });
         
+        const $tagsCont = document.querySelector('.f-tags');
+        // console.log($tagsCont.firstChild);
+        const tagsFilter = <%- JSON.stringify(tagsFilter) %>;
+        console.log(tagsFilter);
+        
+        Array.from($tagsCont.children).forEach( label =>{
+            const value = label.firstElementChild.getAttribute('value');
+            if (tagsFilter.includes(value)) {                
+                label.firstElementChild.setAttribute('checked','')
+            }
+            
+        })
+        
         
         
 
@@ -86,9 +99,10 @@
         const input0 = document.querySelector("#price-min");
         const input1 = document.querySelector("#price-max");
         const inputs = [input0, input1];
-        const rangePrice = <%- JSON.stringify(rangePrice) %>;        
+        const rangePrice = <%- JSON.stringify(rangePrice) %>;
+        const startRange = <%- JSON.stringify(startRange) %>;
         noUiSlider.create(stepsSlider, {
-            start: [rangePrice.min,rangePrice.max],
+            start: [startRange.startMin,startRange.startMax],
             connect: true,
             tooltips: [true, wNumb({ decimals: 1 })],
             range: {

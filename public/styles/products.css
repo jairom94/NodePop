@@ -488,7 +488,7 @@ main.cont-products-n {
                             padding: .7rem .5rem;
                         }
                     }
-                    > input[type="submit"] {
+                    > input[type="submit"],a {
                         background-color: var(--bg-black-primary);
                         box-shadow: 6px 6px 10px #fff,
                             -6px -6px 10px #fff;
@@ -499,6 +499,13 @@ main.cont-products-n {
                         transition: all .3s ease;
                         &:hover {
                             background-color: var(--bg-black-light);
+                        }
+                    }
+                    > a {
+                        text-align: center;
+                        background-color: var(--bg-blue);
+                        &:hover{
+                            background-color: var(--bg-blue-light);
                         }
                     }
                 }

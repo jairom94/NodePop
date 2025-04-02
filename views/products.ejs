@@ -37,12 +37,13 @@
                         <span>FILTER BY</span>
                     </label>
                     <div class="cont-frm-filter">
-                        <form class="frm-filter" action="/products/user/<%= session.userID %>/filter" method="get">
+                        <form class="frm-filter" action="/products" method="get">
                             <fieldset>
                                 <legend>Options</legend>
                                 <div>
                                     <label for="f-name-product">Search Product</label>
-                                    <input type="text" name="name" id="f-name-product" placeholder="write name product">
+                                    <input type="text" name="name" id="f-name-product" placeholder="write name product"
+                                    value="<%= nameFilter %>">
                                 </div>
                                 <div>
                                     <legend>Range Price</legend>
@@ -65,6 +66,7 @@
                                     </fieldset>
                                 </div>
                                 <input type="submit" value="Filtrar">
+                                <a href="/products" class="">Limpiar Filtros</a>
                             </fieldset>
                         </form>
                     </div>
@@ -130,17 +132,17 @@
                             <% } %>
                                 <div class="pagination">
                                     <% if (pagination.page> 1) { %>
-                                        <a href="/products?page=<%= pagination.page-1 %>">Prev</a>
-                                        <% } %>
-                                            <% for( let i=1; i <=pagination.totalPages; i++ ) { %>
-                                                <a href="/products?page=<%= i %>"
-                                                    class="page-item <%= pagination.page === i ? 'current-page' : '' %>">
-                                                    <%= i %>
-                                                </a>
-                                                <% } %>
-                                                    <% if (pagination.page < pagination.totalPages) { %>
-                                                        <a href="/products?page=<%= pagination.page+1 %>">Next</a>
-                                                        <% } %>
+                                        <a href="/products?page=<%= pagination.page-1 %><%= pagination.prevPage %>">Prev</a>
+                                    <% } %>
+                                    <% for( let i=1; i <=pagination.totalPages; i++ ) { %>
+                                        <a href="/products?page=<%= i %><%= pagination.nextPage %>"
+                                            class="page-item <%= pagination.page === i ? 'current-page' : '' %>">
+                                            <%= i %>
+                                        </a>
+                                    <% } %>
+                                    <% if (pagination.page < pagination.totalPages) { %>
+                                        <a href="/products?page=<%= pagination.page+1 %><%= pagination.nextPage %>">Next</a>
+                                    <% } %>
                                 </div>
                 </section>
     </main>
